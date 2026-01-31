@@ -4,7 +4,11 @@ import compress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import AutoImport from "astro-auto-import";
-import icon from "astro-icon"; // https://www.astroicon.dev/guides/upgrade/v1/
+import icon from "astro-icon";
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,8 +23,6 @@ export default defineConfig({
 		}),
 		mdx(),
 		icon({
-			// I include only the icons I use. This is because if you use SSR, ALL icons will be included (no bueno)
-			// https://www.astroicon.dev/reference/configuration#include
 			include: {
 				tabler: [
 					"bulb",
@@ -42,22 +44,21 @@ export default defineConfig({
 			HTML: true,
 			JavaScript: true,
 			CSS: false,
-			Image: false, // astro:assets handles this. Enabling this can dramatically increase build times
-			SVG: false, // astro-icon handles this
+			Image: false,
+			SVG: false,
 		}),
 	],
 	vite: {
 		plugins: [tailwindcss()],
-		// stop inlining short scripts to fix issues with ClientRouter: https://github.com/withastro/astro/issues/12804
 		build: {
 			assetsInlineLimit: 0,
 		},
 		resolve: {
 			alias: {
-			  '@components': path.resolve(__dirname, './src/components'),
-			  '@images': path.resolve(__dirname, './src/assets/images'),
-			  '@config': path.resolve(__dirname, './src/config')
+				'@components': path.resolve(__dirname, './src/components'),
+				'@images': path.resolve(__dirname, './src/assets/images'),
+				'@config': path.resolve(__dirname, './src/config')
 			}
-		  }
+		}
 	},
 });
