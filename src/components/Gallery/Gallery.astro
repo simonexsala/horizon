@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+// Automatically import all images from the casa folder
+const images = await Astro.glob('@images/casa/*.{jpg,jpeg,png,webp}');
+// Get the first image for the background (or specify a different one)
+const backgroundImage = images[0];
+---
+<!-- Fixed Full-Screen Background -->
+<div class="fixed inset-0 -z-10">
+	<Image 
+		src={backgroundImage.default} 
+		alt="Casa background"
+		format="webp"
+		class="w-full h-full object-cover"
+	/>
+	<!-- Dark overlay so white text is visible -->
+	<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<!-- Image Gallery Section -->
+<div class="site-container relative w-full gap-10 py-20 text-center md:py-28 md:text-left">
+    <div class="text-black my-auto mr-auto max-w-[800px] flex-col mb-8">
+        <h1
+            class="font-heading-1 text-4xl font-semibold text-pretty drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)] md:text-4xl md:leading-tight"
+        >
+            La Casa
+        </h1>
+        <p
+            class="mt-8 text-md tracking-widest text-pretty drop-shadow-[0_1px_1px_rgba(0,0,0,0.2)] md:max-w-[550px] md:text-xl"
+        >
+            Un ampio spazio in una località perfetta per il tuo relax. </br>
+            Due camere da letto e una cucina a vostra disposizione.
+        </p>
+    </div>
+	
+	<!-- Responsive Grid Gallery -->
+	<div class="gallery grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		{images.map((img, index) => (
+			<div class="gallery-item overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white">
+				<Image 
+					src={img.default} 
+					alt={`Casa foto ${index + 1}`}
+					format="webp" 
+					widths={[400, 800, 1200]}
+					class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+				/>
+			</div>
+		))}
+	</div>
+</div>
+<style>
+	.gallery-item {
+		aspect-ratio: 4/3;
+		height: auto;
+	}
+	
+	/* Responsive grid without overlaps */
+	@media (min-width: 768px) {
+		.gallery {
+			gap: 1.5rem;
+		}
+		
+		.gallery-item {
+			min-height: 250px;
+		}
+	}
+</style>

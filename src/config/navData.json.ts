@@ -16,35 +16,10 @@ const navConfig: navItem[] = [
 	{
 		text: "Home",
 		link: "/",
-	},
+	},	
 	{
-		text: "portfolios",
-		link: "/portfolio/",
-	},
-	{
-		text: "Pricing",
-		link: "/#pricing",
-	},
-	{
-		text: "Pages",
-		dropdown: [
-			{
-				text: "Portfolio",
-				link: "/portfolio/couple-1/",
-			},
-			{
-				text: "Legal",
-				link: "/privacy-policy/",
-			},
-			{
-				text: "Elements",
-				link: "/elements/",
-			},
-			{
-				text: "404",
-				link: "/not-a-link/",
-			},
-		],
+		text: "La Casa",
+		link: "/casa",
 	},
 ];
 

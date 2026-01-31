@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import siteData from "@config/siteData.json";
+
+import Gallery from "@components/Gallery/Gallery.astro";
+
+
+---
+
+<BaseLayout title={siteData.title} description={siteData.description} navStartStyle="white">
+	<Gallery />
+</BaseLayout>
+
