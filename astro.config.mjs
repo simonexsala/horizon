@@ -52,5 +52,12 @@ export default defineConfig({
 		build: {
 			assetsInlineLimit: 0,
 		},
+		resolve: {
+			alias: {
+			  '@components': path.resolve(__dirname, './src/components'),
+			  '@images': path.resolve(__dirname, './src/assets/images'),
+			  '@config': path.resolve(__dirname, './src/config')
+			}
+		  }
 	},
 });
